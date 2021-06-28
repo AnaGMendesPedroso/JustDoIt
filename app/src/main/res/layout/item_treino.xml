@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/hojeEDiaDeTreinar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/cabin"
+        android:gravity="center"
+        android:text="@string/hoje_dia_de_treinar"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/nomeTreino"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hojeEDiaDeTreinar"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/capriola"
+        android:gravity="center"
+        android:text="birrrll"
+        android:textSize="34sp"
+        />
+
+    <ImageView
+        android:id="@+id/imageViewTreino"
+        android:layout_below="@id/nomeTreino"
+        android:layout_centerInParent="true"
+        android:layout_width="301dp"
+        android:layout_height="214dp"
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="424dp"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <ImageButton
+        android:id="@+id/editarTreino"
+        android:layout_width="41dp"
+        android:layout_height="38dp"
+        android:layout_below="@id/imageViewTreino"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginRight="38dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/lapis_icon" />
+
+    <ImageButton
+        android:id="@+id/iniciarTreino"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:layout_width="195dp"
+        android:layout_height="64dp"
+        android:layout_below="@id/imageViewTreino"
+        android:layout_centerInParent="true"
+        android:background="#00FFFFFF"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/start_icon" />
+
+    <ListView
+        android:id="@+id/listViewExercicios"
+        android:layout_width="349dp"
+        android:layout_height="185dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/iniciarTreino"
+        android:layout_centerInParent="true"
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="468dp" />
+
+    <Button
+        android:id="@+id/buttonConcluirTreino"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listViewExercicios"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:text="@string/concluir_treino"
+        app:backgroundTint="#00BCD4" />
+</RelativeLayout>

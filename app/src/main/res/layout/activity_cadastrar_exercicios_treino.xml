@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CadastrarExerciciosTreino">
+
+
+    <TextView
+        android:id="@+id/textCadastroExercicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/capriola"
+        android:text="@string/novo_exerc_cio"
+        android:textSize="24sp" />
+
+
+    <EditText
+        android:id="@+id/editTextNomeExercicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="85dp"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:fontFamily="@font/cabin"
+        android:hint="@string/nome_exerc_cio" />
+
+    <EditText
+        android:id="@+id/editTextOrdem"
+        android:layout_below="@+id/editTextNomeExercicio"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:fontFamily="@font/cabin"
+        android:hint="@string/ordem"/>
+
+    <EditText
+        android:id="@+id/editTextSeries"
+        android:layout_below="@+id/editTextOrdem"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:fontFamily="@font/cabin"
+        android:hint="@string/series"/>
+
+    <EditText
+        android:id="@+id/editTextQtdRepeticoes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextSeries"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:inputType="number"
+        android:fontFamily="@font/cabin"
+        android:hint="@string/qtd_repeticoes"/>
+
+    <EditText
+        android:id="@+id/editTextCarga"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextQtdRepeticoes"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:fontFamily="@font/cabin"
+        android:hint="@string/carga"/>
+
+    <EditText
+        android:id="@+id/editTextObservacoes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextCarga"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:fontFamily="@font/cabin"
+        android:hint="@string/observacoes"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/editTextObservacoes"
+        android:layout_centerInParent="true"
+        android:background="#009688"
+        android:text="@string/cadastrar_exerc_cio"
+        app:backgroundTint="#009688"
+        android:onClick="cadastrarExercicio"/>
+
+    <Button
+        android:id="@+id/buttonFinalizarCadastroExercicios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="125dp"
+        android:background="#027066"
+        android:onClick="finalizarCadastrarExercicio"
+        android:text="@string/finalizar"
+        app:backgroundTint="#025F56" />
+
+</RelativeLayout>

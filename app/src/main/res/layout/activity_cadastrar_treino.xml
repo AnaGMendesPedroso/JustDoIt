@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CadastrarTreino">
+
+
+    <TextView
+        android:id="@+id/textCadastroTreino"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/capriola"
+        android:text="@string/cadastre_seu_treino"
+        android:textSize="24sp" />
+
+
+    <EditText
+        android:id="@+id/editTextNomeTreino"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="85dp"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:fontFamily="@font/cabin"
+        android:hint="@string/nome_treino" />
+
+
+    <EditText
+        android:id="@+id/editTextDataInicio"
+        android:layout_below="@+id/editTextNomeTreino"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:fontFamily="@font/cabin"
+        android:hint="@string/data_inicio"/>
+
+    <EditText
+        android:id="@+id/editTextDataReavaliacao"
+        android:layout_below="@+id/editTextDataInicio"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:fontFamily="@font/cabin"
+        android:hint="@string/data_reavaliacao"/>
+
+    <EditText
+        android:id="@+id/editTextFrequencia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextDataReavaliacao"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:inputType="number"
+        android:fontFamily="@font/cabin"
+        android:hint="@string/frequ_ncia_semanal"/>
+
+    <EditText
+        android:id="@+id/editTextResponsavel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextFrequencia"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:fontFamily="@font/cabin"
+        android:hint="@string/profissional_respons_vel"/>
+
+    <EditText
+        android:id="@+id/editTextAquecimento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextResponsavel"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:fontFamily="@font/cabin"
+        android:hint="@string/aquecimento"/>
+
+    <TextView
+        android:id="@+id/textViewImegemTreino"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextAquecimento"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/averia_sans_libre_light"
+        android:text="@string/abaixo_coloque_uma_imagem_que_represente_o_treino" />
+
+    <ImageView
+        android:id="@+id/imageViewTreino"
+        android:layout_below="@id/textViewImegemTreino"
+        android:layout_centerInParent="true"
+        android:layout_width="301dp"
+        android:layout_height="214dp"
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="424dp"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/imageViewTreino"
+        android:layout_centerInParent="true"
+        android:background="#009688"
+        android:text="@string/cadastrar_treino"
+        app:backgroundTint="#009688"
+        android:onClick="cadastrarTreino"/>
+
+</RelativeLayout>

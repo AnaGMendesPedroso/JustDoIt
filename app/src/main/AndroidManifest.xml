@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.justdoit">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/justdoitlogo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/justdoitlogo"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.JUSTDOIT"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".CadastrarExerciciosTreino"></activity>
+        <activity android:name=".CadastrarTreino" />
+        <activity android:name=".ConfiguracoesActivity" />
+        <activity android:name=".EvolucaoActivity" />
+        <activity android:name=".AlimentacaoActivity" />
+        <activity android:name=".TreinosActivity" />
+        <activity android:name=".ConteudoWebActivity" />
+        <activity android:name=".TelaInicialActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>

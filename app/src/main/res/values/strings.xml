@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Just Do It.</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="exercicio">Exercício:</string>
+    <string name="ordem">Ordem:</string>
+    <string name="series">Séries:</string>
+    <string name="qtd_repeticoes">Qtd repetições:</string>
+    <string name="observacoes">Observações:</string>
+    <string name="carga">Carga:</string>
+    <string name="hoje_dia_de_treinar">Hoje é dia de treinar:</string>
+    <string name="treinos">Treinos</string>
+    <string name="alimentacao">Alimentação</string>
+    <string name="evolucao">Evolução</string>
+    <string name="configuracoes">Configurações</string>
+    <string name="concluir_treino">Concluir treino</string>
+    <string name="cadastrar_treino">Cadastrar treino</string>
+    <string name="cadastre_seu_treino">Cadastre seu treino</string>
+    <string name="nome_treino">Nome treino</string>
+    <string name="data_inicio">Data inicio</string>
+    <string name="data_reavaliacao">Data reavaliação</string>
+    <string name="frequ_ncia_semanal">Frequência semanal</string>
+    <string name="profissional_respons_vel">Profissional responsável</string>
+    <string name="aquecimento">Aquecimento</string>
+    <string name="abaixo_coloque_uma_imagem_que_represente_o_treino">Abaixo coloque uma imagem que represente o treino:</string>
+    <string name="novo_exerc_cio">Novo exercício</string>
+    <string name="cadastrar_exerc_cio">Cadastrar exercício</string>
+    <string name="nome_exerc_cio">Nome exercício:</string>
+    <string name="finalizar">Finalizar</string>
+</resources>
