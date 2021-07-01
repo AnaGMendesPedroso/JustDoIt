@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".CadastrarTreino">
 
-
     <TextView
         android:id="@+id/textCadastroTreino"
         android:layout_width="wrap_content"
@@ -111,5 +110,4 @@
         android:text="@string/cadastrar_treino"
         app:backgroundTint="#009688"
         android:onClick="cadastrarTreino"/>
-
 </RelativeLayout>

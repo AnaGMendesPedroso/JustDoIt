@@ -1,20 +1,17 @@
 package com.example.justdoit;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.example.justdoit.helpers.DBHelper;
 import com.example.justdoit.model.ExercicioModel;
 import com.example.justdoit.model.TreinoModel;
 
-public class CadastrarExerciciosTreino extends AppCompatActivity {
+public class CadastrarExerciciosTreino extends BaseActivity {
     private DBHelper dbHelper = new DBHelper(this);
-
     private EditText nomeExercicio;
     private EditText ordem;
     private EditText series;
@@ -25,7 +22,9 @@ public class CadastrarExerciciosTreino extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastrar_exercicios_treino);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View v = inflater.inflate(R.layout.activity_cadastrar_exercicios_treino, null, false);
+        drawerLayout.addView(v,0);
 
         nomeExercicio = findViewById(R.id.editTextNomeExercicio);
         ordem = findViewById(R.id.editTextOrdem);

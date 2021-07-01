@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JUSTDOIT"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CadastrarExerciciosTreino"></activity>
+        <activity android:name=".BaseActivity"></activity>
+        <activity android:name=".CadastrarExerciciosTreino" />
         <activity android:name=".CadastrarTreino" />
         <activity android:name=".ConfiguracoesActivity" />
         <activity android:name=".EvolucaoActivity" />

@@ -22,4 +22,5 @@
         android:visibility="invisible"
         app:backgroundTint="#009688"
         android:onClick="redirecionarCadastrarTreino"/>
+
 </RelativeLayout>

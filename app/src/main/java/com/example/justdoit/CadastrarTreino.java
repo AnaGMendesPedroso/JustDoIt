@@ -1,27 +1,22 @@
 package com.example.justdoit;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.justdoit.helpers.DBHelper;
 import com.example.justdoit.model.TreinoModel;
 
 import java.util.Calendar;
 
-public class CadastrarTreino extends AppCompatActivity {
+public class CadastrarTreino extends BaseActivity {
+    
     private DBHelper dbHelper = new DBHelper(this);
-
     private EditText nomeTreino;
     private EditText dataInicio;
     private EditText dataReavaliacao;
@@ -34,7 +29,9 @@ public class CadastrarTreino extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastrar_treino);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View v = inflater.inflate(R.layout.activity_cadastrar_treino, null, false);
+        drawerLayout.addView(v,0);
 
         nomeTreino = findViewById(R.id.editTextNomeTreino);
         dataInicio = findViewById(R.id.editTextDataInicio);
@@ -43,8 +40,7 @@ public class CadastrarTreino extends AppCompatActivity {
         profissional = findViewById(R.id.editTextResponsavel);
         aquecimento = findViewById(R.id.editTextAquecimento);
         imagemTreino = findViewById(R.id.imageViewTreino);
-
-
+        
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
