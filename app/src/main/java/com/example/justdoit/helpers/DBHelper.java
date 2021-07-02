@@ -181,7 +181,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return exercicioTreino;
     }
 
-    public TreinoModel consultarTreinoHoje(String dataAtual) throws ParseException {
+    public TreinoModel consultarTreinosHoje(String dataAtual) throws ParseException {
 
         db = this.getReadableDatabase();
 
@@ -213,6 +213,34 @@ public class DBHelper extends SQLiteOpenHelper {
             }
         }
         return treinoHoje;
+    }
+
+    public ArrayList<TreinoModel> consultarTodosTreinos() throws ParseException {
+
+        db = this.getReadableDatabase();
+
+        String queryDadosTreino = "SELECT * FROM " + TREINO_TABLE_NAME + "";
+
+        Cursor cursorQueryDadosTreino = db.rawQuery(queryDadosTreino, null);
+
+        ArrayList<TreinoModel> todosTreinos = new ArrayList<TreinoModel>();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        if (cursorQueryDadosTreino.moveToFirst()) {
+            do {
+
+                int treinoId = cursorQueryDadosTreino.getInt(0);
+                String nomeTreino = cursorQueryDadosTreino.getString(1);
+                String dataInicio = simpleDateFormat.format(simpleDateFormat.parse(cursorQueryDadosTreino.getString(2)));
+                int freqSemanal = cursorQueryDadosTreino.getInt(3);
+                String educador = cursorQueryDadosTreino.getString(4);
+                String aquecimento = cursorQueryDadosTreino.getString(5);
+                TreinoModel treino = new TreinoModel(treinoId,nomeTreino,dataInicio,freqSemanal,educador,aquecimento);
+                todosTreinos.add(treino);
+
+            } while (cursorQueryDadosTreino.moveToNext());
+        }
+        return todosTreinos;
     }
 
     public int buscarTreinoId(TreinoModel treino){

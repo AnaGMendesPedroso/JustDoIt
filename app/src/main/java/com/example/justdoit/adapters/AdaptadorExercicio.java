@@ -13,27 +13,27 @@ import com.example.justdoit.model.ExercicioModel;
 import java.util.ArrayList;
 
 public class AdaptadorExercicio extends BaseAdapter {
-    private ArrayList<ExercicioModel> exerciciosTreino;
+    private ExercicioModel exercicioTreino;
     private Context contexto;
 
-    public AdaptadorExercicio(Context contexto, ArrayList<ExercicioModel> exerciciosTreino) {
+    public AdaptadorExercicio(Context contexto, ExercicioModel exerciciosTreino) {
     this.contexto = contexto;
-    this.exerciciosTreino = exerciciosTreino;
+    this.exercicioTreino = exerciciosTreino;
     }
 
     @Override
     public int getCount() {
-        return this.exerciciosTreino.size();
+        return 1;
     }
 
     @Override
     public Object getItem(int position) {
-        return exerciciosTreino.get(position);
+        return exercicioTreino;
     }
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return exercicioTreino.getIdExercicio();
     }
 
     @Override
@@ -48,12 +48,12 @@ public class AdaptadorExercicio extends BaseAdapter {
         TextView carga = itemLista.findViewById(R.id.cargaExercicio);
         TextView observacoes = itemLista.findViewById(R.id.observacoesExercicio);
 
-        exercicio.setText(this.exerciciosTreino.get(position).getNomeExercicio());
-        ordem.setText(this.exerciciosTreino.get(position).getOrdem());
-        series.setText(this.exerciciosTreino.get(position).getSeries());
-        qtdRepeticoes.setText(this.exerciciosTreino.get(position).getQtdRepeticoes());
-        carga.setText(String.valueOf(this.exerciciosTreino.get(position).getCarga()));
-        observacoes.setText(this.exerciciosTreino.get(position).getObservacoes());
+        exercicio.setText(this.exercicioTreino.getNomeExercicio());
+        ordem.setText(this.exercicioTreino.getOrdem());
+        series.setText(this.exercicioTreino.getSeries());
+        qtdRepeticoes.setText(this.exercicioTreino.getQtdRepeticoes());
+        carga.setText(String.valueOf(this.exercicioTreino.getCarga()));
+        observacoes.setText(this.exercicioTreino.getObservacoes());
 
         return itemLista;
     }

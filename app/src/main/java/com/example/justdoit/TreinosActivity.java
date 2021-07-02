@@ -22,6 +22,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
@@ -39,33 +40,50 @@ public class TreinosActivity extends BaseActivity {
         ListView listView = findViewById(R.id.treinoDeHoje);
         Button buttonCadastrarTreino = findViewById(R.id.buttonCadastrarTreino);
 
-        LocalDate hoje = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 
-            hoje = LocalDate.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            String hojeFormatado = hoje.format(formatter);
-
-            TreinoModel treinoHoje = null;
-            try {
-                treinoHoje = dbHelper.consultarTreinoHoje(hojeFormatado);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            if(treinoHoje != null){
-
-                listView.setAdapter(new AdaptadorTreino(this,treinoHoje));
-
-            } else {
-                Toast.makeText(getApplicationContext(), "Não há treinos cadastrados", Toast.LENGTH_LONG).show();
-                buttonCadastrarTreino.setVisibility(View.VISIBLE);
-            }
+        ArrayList<TreinoModel> treinos = null;
+        try {
+            treinos = dbHelper.consultarTodosTreinos();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+
+        if(treinos.size()!=0){
+            for ( TreinoModel t: treinos) {
+                listView.setAdapter(new AdaptadorTreino(this,t));
+            }
+
+        } else {
+            Toast.makeText(getApplicationContext(), "Não há treinos cadastrados", Toast.LENGTH_LONG).show();
+            buttonCadastrarTreino.setVisibility(View.VISIBLE);
+        }
+
     }
 
     public void redirecionarCadastrarTreino(View view){
         Intent intent = new Intent(this, CadastrarTreino.class);
         startActivity(intent);
+    }
+
+    public void atualizarTreinos(View view){
+        ListView listView = findViewById(R.id.treinoDeHoje);
+        Button buttonCadastrarTreino = findViewById(R.id.buttonCadastrarTreino);
+
+        ArrayList<TreinoModel> treinos = null;
+        try {
+            treinos = dbHelper.consultarTodosTreinos();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if(treinos.size()!=0){
+            for ( TreinoModel t: treinos) {
+                listView.setAdapter(new AdaptadorTreino(this,t));
+            }
+
+        } else {
+            Toast.makeText(getApplicationContext(), "Não há treinos cadastrados", Toast.LENGTH_LONG).show();
+            buttonCadastrarTreino.setVisibility(View.VISIBLE);
+        }
     }
 }
