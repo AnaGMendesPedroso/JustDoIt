@@ -7,7 +7,6 @@ public class TreinoModel {
 
     private String nomeTreino;
     private String dataInicio;
-    private String dataReavaliacao;
     private int freqSemanal;
     private String educadorFisicoResponsavel;
     private String aquecimento;
@@ -15,10 +14,9 @@ public class TreinoModel {
     private int idTreino;
     private ArrayList<ExercicioModel> exerciciosTreino;
 
-    public TreinoModel(String nomeTreino, String dataInicio, String dataReavaliacao, int freqSemanal, String educadorFisicoResponsavel, String aquecimento, int imagemTreino, int idTreino, ArrayList<ExercicioModel> exerciciosTreino) {
+    public TreinoModel(String nomeTreino, String dataInicio, int freqSemanal, String educadorFisicoResponsavel, String aquecimento, int imagemTreino, int idTreino, ArrayList<ExercicioModel> exerciciosTreino) {
         this.nomeTreino = nomeTreino;
         this.dataInicio = dataInicio;
-        this.dataReavaliacao = dataReavaliacao;
         this.freqSemanal = freqSemanal;
         this.educadorFisicoResponsavel = educadorFisicoResponsavel;
         this.aquecimento = aquecimento;
@@ -27,10 +25,9 @@ public class TreinoModel {
         this.exerciciosTreino = exerciciosTreino;
     }
 
-    public TreinoModel(String nomeTreino, String dataInicio, String dataReavaliacao, int freqSemanal, String educadorFisicoResponsavel, String aquecimento, int imagemTreino) {
+    public TreinoModel(String nomeTreino, String dataInicio, int freqSemanal, String educadorFisicoResponsavel, String aquecimento, int imagemTreino) {
         this.nomeTreino = nomeTreino;
         this.dataInicio = dataInicio;
-        this.dataReavaliacao = dataReavaliacao;
         this.freqSemanal = freqSemanal;
         this.educadorFisicoResponsavel = educadorFisicoResponsavel;
         this.aquecimento = aquecimento;
@@ -38,6 +35,15 @@ public class TreinoModel {
     }
 
     public TreinoModel() {
+    }
+
+    public TreinoModel(int treinoId, String nomeTreino, String dataInicio, int freqSemanal, String educador, String aquecimento) {
+        this.idTreino=treinoId;
+        this.nomeTreino = nomeTreino;
+        this.dataInicio = dataInicio;
+        this.freqSemanal = freqSemanal;
+        this.educadorFisicoResponsavel = educador;
+        this.aquecimento = aquecimento;
     }
 
     public String getNomeTreino() {
@@ -82,14 +88,6 @@ public class TreinoModel {
 
     public void setDataInicio(String dataInicio) {
         this.dataInicio = dataInicio;
-    }
-
-    public String getDataReavaliacao() {
-        return dataReavaliacao;
-    }
-
-    public void setDataReavaliacao(String dataReavaliacao) {
-        this.dataReavaliacao = dataReavaliacao;
     }
 
     public int getFreqSemanal() {

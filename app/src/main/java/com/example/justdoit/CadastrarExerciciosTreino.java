@@ -10,6 +10,8 @@ import com.example.justdoit.helpers.DBHelper;
 import com.example.justdoit.model.ExercicioModel;
 import com.example.justdoit.model.TreinoModel;
 
+import java.text.ParseException;
+
 public class CadastrarExerciciosTreino extends BaseActivity {
     private DBHelper dbHelper = new DBHelper(this);
     private EditText nomeExercicio;
@@ -45,7 +47,12 @@ public class CadastrarExerciciosTreino extends BaseActivity {
 
         int treinoId = Integer.parseInt(intent.getStringExtra("treinoId"));
 
-        TreinoModel treinoModel = dbHelper.buscarTreinoPorId(treinoId);
+        TreinoModel treinoModel = null;
+        try {
+            treinoModel = dbHelper.buscarTreinoPorId(treinoId);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         dbHelper.vincularExercicioTreino(treinoModel, exercicioModel);
 
         Toast.makeText(getApplicationContext(), "Exercício cadastrado com sucesso", Toast.LENGTH_LONG).show();

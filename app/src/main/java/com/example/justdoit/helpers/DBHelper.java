@@ -10,7 +10,8 @@ import androidx.annotation.Nullable;
 import com.example.justdoit.model.ExercicioModel;
 import com.example.justdoit.model.TreinoModel;
 
-import java.time.LocalDate;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -32,7 +33,6 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String COLUMM_TREINO_ID = "treinoID";
     private static final String COLUMM_NOME_TREINO = "nomeTreino";
     private static final String COLUMM_DATA_INICIO = "dataInicio";
-    private static final String COLUMM_DATA_REAVALIACAO = "dataReavaliacao";
     private static final String COLUMM_FREQUENCIA_SEMANAL = "freqSemanal";
     private static final String COLUMM_EDUCADOR_RESPONSAVEL = "educadorFisicoResponsavel";
     private static final String COLUMM_AQUECIMENTO = "aquecimento";
@@ -47,7 +47,6 @@ public class DBHelper extends SQLiteOpenHelper {
                     + COLUMM_TREINO_ID + " integer primary key autoincrement,"
                     + COLUMM_NOME_TREINO + " text not null,"
                     + COLUMM_DATA_INICIO + " date not null,"
-                    + COLUMM_DATA_REAVALIACAO + " date not null,"
                     + COLUMM_FREQUENCIA_SEMANAL + " integer not null,"
                     + COLUMM_EDUCADOR_RESPONSAVEL + " text not null,"
                     + COLUMM_AQUECIMENTO + " text not null"
@@ -113,7 +112,6 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMM_NOME_TREINO, String.valueOf(treino.getNomeTreino()));
         values.put(COLUMM_DATA_INICIO, String.valueOf(treino.getDataInicio()));
-        values.put(COLUMM_DATA_REAVALIACAO, String.valueOf(treino.getDataReavaliacao()));
         values.put(COLUMM_FREQUENCIA_SEMANAL, treino.getFreqSemanal());
         values.put(COLUMM_EDUCADOR_RESPONSAVEL, treino.getEducadorFisicoResponsavel());
         values.put(COLUMM_AQUECIMENTO, treino.getAquecimento());
@@ -183,41 +181,36 @@ public class DBHelper extends SQLiteOpenHelper {
         return exercicioTreino;
     }
 
-    public TreinoModel consultarTreinoHoje(String dataAtual) {
+    public TreinoModel consultarTreinoHoje(String dataAtual) throws ParseException {
+
         db = this.getReadableDatabase();
 
-        String queryDadosTreino = "SELECT "
-                + COLUMM_TREINO_ID + ","
-                + COLUMM_DATA_INICIO + ","
-                + COLUMM_DATA_REAVALIACAO + ","
-                + COLUMM_FREQUENCIA_SEMANAL + ","
-                + COLUMM_EDUCADOR_RESPONSAVEL + ","
-                + COLUMM_AQUECIMENTO
-                + " FROM " + TREINO_TABLE_NAME
-                + " WHERE "+ dataAtual +" BETWEEN " + COLUMM_DATA_INICIO
-                + " AND " + COLUMM_DATA_REAVALIACAO + "";
+        String queryDadosTreino = "SELECT * FROM " + TREINO_TABLE_NAME + "";
 
         Cursor cursorQueryDadosTreino = db.rawQuery(queryDadosTreino, null);
 
+        ArrayList<TreinoModel> todosTreinos = new ArrayList<TreinoModel>();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         TreinoModel treinoHoje = new TreinoModel();
 
         if (cursorQueryDadosTreino.moveToFirst()) {
             do {
 
                 int treinoId = cursorQueryDadosTreino.getInt(0);
-                String dataInicio = cursorQueryDadosTreino.getString(1);
-                String dataReavaliacao = cursorQueryDadosTreino.getString(2);
+                String nomeTreino = cursorQueryDadosTreino.getString(1);
+                String dataInicio = simpleDateFormat.format(simpleDateFormat.parse(cursorQueryDadosTreino.getString(2)));
                 int freqSemanal = cursorQueryDadosTreino.getInt(3);
                 String educador = cursorQueryDadosTreino.getString(4);
                 String aquecimento = cursorQueryDadosTreino.getString(5);
-                treinoHoje.setDataInicio(dataInicio);
-                treinoHoje.setDataReavaliacao(dataReavaliacao);
-                treinoHoje.setIdTreino(treinoId);
-                treinoHoje.setFreqSemanal(freqSemanal);
-                treinoHoje.setEducadorFisicoResponsavel(educador);
-                treinoHoje.setAquecimento(aquecimento);
+                TreinoModel treino = new TreinoModel(treinoId,nomeTreino,dataInicio,freqSemanal,educador,aquecimento);
+                todosTreinos.add(treino);
 
             } while (cursorQueryDadosTreino.moveToNext());
+        }
+        for (TreinoModel t: todosTreinos) {
+            if(simpleDateFormat.parse(t.getDataInicio()).after(simpleDateFormat.parse(dataAtual))){
+                return t;
+            }
         }
         return treinoHoje;
     }
@@ -229,7 +222,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COLUMM_TREINO_ID
                 + " FROM " + TREINO_TABLE_NAME
                 + " WHERE "+ COLUMM_DATA_INICIO + " LIKE '" + treino.getDataInicio() +"'"
-                + " AND "+ COLUMM_DATA_REAVALIACAO + " LIKE '" + treino.getDataReavaliacao() +"'"
                 + " AND "+ COLUMM_FREQUENCIA_SEMANAL + " = " + treino.getFreqSemanal() +""
                 + " AND "+ COLUMM_EDUCADOR_RESPONSAVEL + " LIKE '" + treino.getEducadorFisicoResponsavel() +"'"
                 + " AND "+ COLUMM_AQUECIMENTO + " LIKE '" + treino.getAquecimento() +"'";
@@ -271,13 +263,12 @@ public class DBHelper extends SQLiteOpenHelper {
         return exercicioId;
     }
 
-    public TreinoModel buscarTreinoPorId(int idTreino){
+    public TreinoModel buscarTreinoPorId(int idTreino) throws ParseException {
         db = this.getReadableDatabase();
 
         String queryDadosTreino = "SELECT "
                 + COLUMM_TREINO_ID + ","
                 + COLUMM_DATA_INICIO + ","
-                + COLUMM_DATA_REAVALIACAO + ","
                 + COLUMM_FREQUENCIA_SEMANAL + ","
                 + COLUMM_EDUCADOR_RESPONSAVEL + ","
                 + COLUMM_AQUECIMENTO
@@ -285,6 +276,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + " WHERE "+ COLUMM_TREINO_ID + " = " + idTreino;
 
         Cursor cursorQueryDadosTreino = db.rawQuery(queryDadosTreino, null);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
         TreinoModel treinoHoje = new TreinoModel();
 
@@ -292,13 +284,11 @@ public class DBHelper extends SQLiteOpenHelper {
             do {
 
                 int treinoId = cursorQueryDadosTreino.getInt(0);
-                String dataInicio = cursorQueryDadosTreino.getString(1);
-                String dataReavaliacao = cursorQueryDadosTreino.getString(2);
-                int freqSemanal = cursorQueryDadosTreino.getInt(3);
-                String educador = cursorQueryDadosTreino.getString(4);
-                String aquecimento = cursorQueryDadosTreino.getString(5);
+                String dataInicio = simpleDateFormat.format(simpleDateFormat.parse(cursorQueryDadosTreino.getString(1)));
+                int freqSemanal = cursorQueryDadosTreino.getInt(2);
+                String educador = cursorQueryDadosTreino.getString(3);
+                String aquecimento = cursorQueryDadosTreino.getString(4);
                 treinoHoje.setDataInicio(dataInicio);
-                treinoHoje.setDataReavaliacao(dataReavaliacao);
                 treinoHoje.setIdTreino(treinoId);
                 treinoHoje.setFreqSemanal(freqSemanal);
                 treinoHoje.setEducadorFisicoResponsavel(educador);
@@ -310,30 +300,28 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public boolean removerTreino(int treinoId){
+
         db = this.getWritableDatabase();
 
-        String query = "SELECT " + COLUMM_TREINO_ID +" , "+ COLUMM_EXERCICIO_ID + " FROM " + TREINO_EXERCICIO_TABLE_NAME + " WHERE " + COLUMM_TREINO_ID + " = " + treinoId;
+        String query = "SELECT " + COLUMM_EXERCICIO_ID + " FROM " + TREINO_EXERCICIO_TABLE_NAME + " WHERE " + COLUMM_TREINO_ID + " = " + treinoId;
         Cursor cursor = db.rawQuery(query, null);
 
         boolean resultado = false;
 
-        if (cursor.moveToFirst()) {
+        if(cursor.moveToFirst()){
 
-            if (cursor.getInt(0) != 0) {
+            if(cursor.getInt(0) != 0){
                 resultado = false;
 
             } else {
-                String deleteTreino = "DELETE FROM " + TREINO_TABLE_NAME + " WHERE " + COLUMM_TREINO_ID + " = " + cursor.getInt(0);
+                String deleteTreino = "DELETE FROM " + TREINO_TABLE_NAME + " WHERE " + COLUMM_TREINO_ID + " = " + treinoId;
                 db.execSQL(deleteTreino);
 
-                String deleteExercicios = "DELETE FROM " + EXERCICIO_TABLE_NAME + " WHERE " + COLUMM_EXERCICIO_ID + " = "  + cursor.getInt(1);
+                String deleteExercicios = "DELETE FROM " + EXERCICIO_TABLE_NAME + " WHERE " + COLUMM_EXERCICIO_ID + " = "  + cursor.getInt(0);
                 db.execSQL(deleteExercicios);
-
                 resultado = true;
             }
-
-        } while (cursor.moveToNext());
-
+        }
         return resultado;
     }
 }

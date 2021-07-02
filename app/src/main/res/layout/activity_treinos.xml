@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/treinoDeHoje"
+        android:layout_marginTop="55dp"
     />
 
     <Button
@@ -22,5 +23,16 @@
         android:visibility="invisible"
         app:backgroundTint="#009688"
         android:onClick="redirecionarCadastrarTreino"/>
+
+    <Button
+        android:id="@+id/buttonAtualizarTreinos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/capriola"
+        android:text="Atualizar"
+        android:visibility="visible"
+        app:backgroundTint="#009688"
+        android:onClick="atualizarTreinos"/>
 
 </RelativeLayout>

@@ -39,20 +39,10 @@
         android:hint="@string/data_inicio"/>
 
     <EditText
-        android:id="@+id/editTextDataReavaliacao"
-        android:layout_below="@+id/editTextDataInicio"
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:fontFamily="@font/cabin"
-        android:hint="@string/data_reavaliacao"/>
-
-    <EditText
         android:id="@+id/editTextFrequencia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextDataReavaliacao"
+        android:layout_below="@+id/editTextDataInicio"
         android:layout_centerInParent="true"
         android:ems="10"
         android:inputType="number"

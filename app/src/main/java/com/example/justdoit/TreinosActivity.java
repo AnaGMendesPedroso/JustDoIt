@@ -19,6 +19,7 @@ import com.example.justdoit.helpers.DBHelper;
 import com.example.justdoit.model.TreinoModel;
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -44,22 +45,19 @@ public class TreinosActivity extends BaseActivity {
             hoje = LocalDate.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             String hojeFormatado = hoje.format(formatter);
-            TreinoModel treinoHoje = dbHelper.consultarTreinoHoje(hojeFormatado);
 
-            if(treinoHoje.getNomeTreino() != null){
+            TreinoModel treinoHoje = null;
+            try {
+                treinoHoje = dbHelper.consultarTreinoHoje(hojeFormatado);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            if(treinoHoje != null){
 
                 listView.setAdapter(new AdaptadorTreino(this,treinoHoje));
 
             } else {
-                dbHelper.removerTreino(1);
-                dbHelper.removerTreino(2);
-                dbHelper.removerTreino(3);
-                dbHelper.removerTreino(4);
-                dbHelper.removerTreino(5);
-                dbHelper.removerTreino(6);
-                dbHelper.removerTreino(7);
-                dbHelper.removerTreino(8);
-                dbHelper.removerTreino(9);
                 Toast.makeText(getApplicationContext(), "Não há treinos cadastrados", Toast.LENGTH_LONG).show();
                 buttonCadastrarTreino.setVisibility(View.VISIBLE);
             }
